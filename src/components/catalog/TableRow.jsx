@@ -1,0 +1,59 @@
+import { TableCell, TableRow } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+
+import { deleteCar } from "./carActions";
+import { useDispatch } from "react-redux";
+import ChangeRow from "../changeRow/ChangeRow";
+import { useState } from "react";
+
+const TRow = ({ user, car }) => {
+  const dispatch = useDispatch();
+
+  const [changeRowVisible, setChangeRowVisible] = useState(false);
+
+  const deleteCarHandler = () => {
+    dispatch(deleteCar(car.id, user.id, user.token));
+  };
+
+  const changeCarRowVisible = () => {
+    setChangeRowVisible(true);
+  };
+  const changeCarRowUnvisible=()=>{
+    setChangeRowVisible(false);
+
+  }
+  return (
+    <>
+      <TableRow key={car.id}>
+        {user.id === car.user.id && (
+          <TableCell>
+            <CreateIcon
+              onClick={changeCarRowVisible}
+              sx={{ fontSize: "19px", color: "black" }}
+            />
+            <DeleteOutlineIcon
+              onClick={deleteCarHandler}
+              sx={{ fontSize: "19px", color: "black" }}
+            />
+          </TableCell>
+        )}
+        {user.id !== car.user.id && <TableCell></TableCell>}
+        <TableCell>{car.make}</TableCell>
+        <TableCell>{car.model}</TableCell>
+        <TableCell>{car.year}</TableCell>
+        <TableCell>{car.engineType}</TableCell>
+        <TableCell>{car.gearBox}</TableCell>
+        <TableCell>{car.condition}</TableCell>
+        <TableCell>{car.horsePower}</TableCell>
+        <TableCell>{car.color}</TableCell>
+        <TableCell>{car.price}</TableCell>
+        <TableCell>{car.city}</TableCell>
+        <TableCell>{car.mileage}</TableCell>
+        <TableCell>{car.extras}</TableCell>
+      </TableRow>
+      {changeRowVisible && <ChangeRow car={car} userId={user.id} token={user.token} changeCarRowUnvisible={changeCarRowUnvisible}/>}
+    </>
+  );
+};
+export default TRow;
