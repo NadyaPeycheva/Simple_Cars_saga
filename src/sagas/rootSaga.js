@@ -13,6 +13,7 @@ import { loginSaga } from "./loginSaga";
 import { addCarSaga } from "./addCarSaga";
 import { deleteCarSaga } from "./deleteCarSaga";
 import { changeCarSaga } from "./changeCarSaga";
+import { logoutSaga } from "./logoutSaga";
 
 function* rootSaga(){
     yield all([
@@ -21,7 +22,8 @@ function* rootSaga(){
         loginSaga(loginApi),
         addCarSaga(addCarApi),
         deleteCarSaga(deleteCarApi),
-        changeCarSaga(changeCarApi)
+        changeCarSaga(changeCarApi),
+        logoutSaga()
     ])
 }
 export default rootSaga;

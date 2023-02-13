@@ -4,8 +4,8 @@ export const loginUserReducer = (state = initialUserState, action) => {
     return action.payload;
   } else if (action.type === "FIRST_USER_CHECK") {
     return action.payload;
-  } else if (action.type === "LOGIN_USER_UNSUCCESS") {
-    return {};
+  } else if(action.type === "LOGOUT_USER"){
+    return initialUserState;
   }
   return state;
 };

@@ -1,6 +1,5 @@
 
 const registerAction=(userData)=>{
-    console.log('action');
     return(
         {
             type:"REGISTER_USER",
@@ -13,6 +12,6 @@ export default registerAction;
 export const registerSuccess=()=>{
     return({type:"REGISTER_USER_SUCCESS"})
 }
-export const registerUnSuccess=(error)=>{
-    return({type:"REGISTER_USER_UNSUCCESS",payload:error})
+export const registerUnSuccess=()=>{
+    return({type:"ERROR",payload:'This user can be already exists. Pleas try with another data.'})
 }

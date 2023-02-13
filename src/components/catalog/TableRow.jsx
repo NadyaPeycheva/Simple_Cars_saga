@@ -19,14 +19,13 @@ const TRow = ({ user, car }) => {
   const changeCarRowVisible = () => {
     setChangeRowVisible(true);
   };
-  const changeCarRowUnvisible=()=>{
+  const changeCarRowUnvisible = () => {
     setChangeRowVisible(false);
-
-  }
-  return (
-    <>
-      <TableRow key={car.id}>
-        {user.id === car.user.id && (
+  };
+  const UserIcons = ({ userId, carId }) => {
+    return (
+      <>
+        {userId === carId ? (
           <TableCell>
             <CreateIcon
               onClick={changeCarRowVisible}
@@ -37,8 +36,19 @@ const TRow = ({ user, car }) => {
               sx={{ fontSize: "19px", color: "black" }}
             />
           </TableCell>
+        ) : (
+          <TableCell></TableCell>
         )}
-        {user.id !== car.user.id && <TableCell></TableCell>}
+      </>
+    );
+  };
+
+  return (
+    <>
+      <TableRow key={car.id}>
+        {user.username && (
+          <UserIcons userId={user.id} carId={car.user.id} />
+        )}
         <TableCell>{car.make}</TableCell>
         <TableCell>{car.model}</TableCell>
         <TableCell>{car.year}</TableCell>
@@ -52,7 +62,14 @@ const TRow = ({ user, car }) => {
         <TableCell>{car.mileage}</TableCell>
         <TableCell>{car.extras}</TableCell>
       </TableRow>
-      {changeRowVisible && <ChangeRow car={car} userId={user.id} token={user.token} changeCarRowUnvisible={changeCarRowUnvisible}/>}
+      {changeRowVisible && (
+        <ChangeRow
+          car={car}
+          userId={user.id}
+          token={user.token}
+          changeCarRowUnvisible={changeCarRowUnvisible}
+        />
+      )}
     </>
   );
 };

@@ -11,11 +11,11 @@ export default function* registerUserSaga(registerApi) {
 
 function*registerUser(registerApi, userData) {
   try {
-    const res = yield call(registerApi,userData);
+    yield call(registerApi,userData);
 
     yield put(registerSuccess());
 
   } catch (error) {
-    yield put(registerUnSuccess(error.status));
+    yield put(registerUnSuccess());
   }
 }

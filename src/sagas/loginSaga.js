@@ -22,6 +22,6 @@ function* loginUser(loginApi, userData) {
     yield put(loginUserSuccess(user));
     yield localStorage.setItem('user',JSON.stringify(user));
   } catch (err) {
-    yield put(loginUserUnSuccess(err.status));
+    yield put(loginUserUnSuccess());
   }
 }

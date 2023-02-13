@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router";
-import { firstUserCheck } from "./components/login/loginAction";
+import { firstUserCheck, logout } from "./components/login/loginAction";
 import Catalog from "./containers/Catalog";
 import Login from "./containers/Login";
 import Register from "./containers/Register";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -15,12 +16,18 @@ function App() {
       dispatch(firstUserCheck(localeUser));
     }
   }, []);
+if(user.username){
+  setTimeout(() => {
+    dispatch(logout())
+    
+  }, 300000);
+}
 
   return (
     <Switch>
       <Route path="/" exact>
         {!user.username&&<Redirect to="/register"></Redirect>}
-        {user&&<Redirect to="/catalog"></Redirect>}
+        {user.username&&<Redirect to="/catalog"></Redirect>}
       </Route>
       <Route path="/catalog">
         <Catalog />

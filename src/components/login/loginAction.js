@@ -16,8 +16,20 @@ export const loginUserSuccess=(user)=>{
         {type:"LOGIN_USER_SUCCESS",payload:user}
     )
 }
-export const loginUserUnSuccess=(error)=>{
+export const loginUserUnSuccess=()=>{
     return(
-        {type:"LOGIN_USER_UNSUCCESS",payload:error}
+        {type:"ERROR",payload:'The user is not login. Please try with valid date !'}
     )
+}
+
+export const logoutUser=(userName)=>{
+    return{
+        type:"LOGOUT_USER",payload:userName
+    }
+}
+
+export const logout=()=>{
+    return{
+        type:"LOGOUT"
+    }
 }
